@@ -8,5 +8,4 @@ public class Person
     public Name FirstName { get; set; } = new();
     public Name? MiddleName { get; set; }
     public Name LastName { get; set; } = new();
-    // TODO....
 }
