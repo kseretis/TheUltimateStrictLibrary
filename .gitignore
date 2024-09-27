@@ -1,0 +1,8 @@
+## ignores
+
+.idea
+.vs
+
+bin
+obj
+Properties

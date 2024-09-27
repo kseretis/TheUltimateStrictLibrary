@@ -1,0 +1,3 @@
+# TheUltimateStrictLibrary
+
+Under constuction...
