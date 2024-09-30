@@ -42,12 +42,12 @@ namespace TheUltimateStrictLibrary.Validators
             IsNullOrEmpty(value);
 
             // FIXME 
-            if (!ContainASymbol(value!))
-            {
-                throw new InvalidTypeException($"Value {value} doesn't contain any symbol");
-            }
+            // if (!ContainASymbol(value!))
+            // {
+            //     throw new InvalidTypeException($"Value {value} doesn't contain any symbol");
+            // }
             
-            int numberOfAts= value!.Count(c => c.Equals('@'));
+            int numberOfAts = value!.Count(c => c.Equals('@'));
 
             if (numberOfAts > 1)
             {

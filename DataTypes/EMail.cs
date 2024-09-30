@@ -4,27 +4,34 @@ namespace TheUltimateStrictLibrary.DataTypes
 {
     public class EMail
     {
-        private string? _address;
-        private string? _domain;
-        private string? _suffix;
-        
-        public string? Address { get; }
-        public string? Domain { get; }
-        public string? Suffix { get; }
+        private const char Dot = '.';
+        private const char At = '@';
+
+        public string? Address { get; private set; }
+
+        public string? Provider { get; private set; }
+
+        public string? TopLevelDomain { get; private set; }
+
+        public string? Domain { get; private set; }
 
         public string? Value
         {
-            get => String.Join(null, _address, "@", _domain, _suffix);
+            get => String.Join(null, Address, At, Domain);
             set
             {
                 Validator.IsAnEmail(value);
                 
-                var splitValue = value!.Split("@");
-                _address = splitValue[0];
+                var splitValue = value!.Split(At);
+                Address = splitValue.First();
+                Domain = splitValue.Last();
 
-                var splitDomain = splitValue[1].Split(".");
-                _domain = splitDomain[0];
-                _suffix = splitDomain[1];
+                var splitDomain = Domain.Split(Dot).ToList();
+
+                TopLevelDomain = splitDomain.Last();
+                splitDomain.Remove(TopLevelDomain);
+                
+                Provider = String.Join(Dot, splitDomain);
             }
         }
 
