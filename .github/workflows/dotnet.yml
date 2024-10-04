@@ -34,6 +34,8 @@ jobs:
       run: ls -la bin/Release/net8.0/
     - name: Push Nuget Package
       run: |
+        ls -la bin/Release/net8.0/
+        ls -la bin/Release/net8.0/*.nupkg
         PACKAGE=$(ls bin/Release/net8.0/*.nupkg | head -n 1)
         echo "Pushing package: $PACKAGE"
         dotnet nuget push "$PACKAGE" --source "https://nuget.pkg.github.com/kseretis/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
