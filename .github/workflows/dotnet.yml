@@ -30,6 +30,11 @@ jobs:
     #   run: dotnet test --no-build --verbosity normal
     - name: Pack
       run: dotnet pack --configuration Release
-    - name: PushNuget
+    - name: Inspect Build Output after build
+      run: ls -la bin/Release/net8.0/
+    - name: Push Nuget Package
       run: dotnet nuget push **/*.nupkg --source "https://nuget.pkg.github.com/kseretis/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+    - name: Clean Output Directory
+      run: rm -rf bin/Release/net8.0/
+
 
