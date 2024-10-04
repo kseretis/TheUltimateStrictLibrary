@@ -26,8 +26,6 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Inspect Build Output after test
-      run: ls -la bin/Release/net8.0/
     - name: Pack
       run: dotnet pack --configuration Release
     - name: Inspect Build Output after pack
