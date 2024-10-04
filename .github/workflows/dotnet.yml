@@ -30,9 +30,8 @@ jobs:
       run: dotnet pack --no-build --configuration Release --verbosity detailed
     - name: Push Nuget Package
       run: |
-        ls -la bin/Release/net8.0/
-        ls -la bin/Release/net8.0/*.nupkg
-        PACKAGE=$(ls bin/Release/net8.0/*.nupkg | head -n 1)
+        ls -la bin/Release/
+        PACKAGE=$(ls bin/Release/*.nupkg | head -n 1)
         echo "Pushing package: $PACKAGE"
         dotnet nuget push "$PACKAGE" --source "https://nuget.pkg.github.com/kseretis/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
     - name: Clean Output Directory
