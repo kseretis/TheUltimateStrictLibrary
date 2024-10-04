@@ -2,7 +2,7 @@
 {
     public enum CountryCode
     {
-        // TODO improve this enum
+        // TODO improve this enum...
         Greece = 30,
         Mexico = 52
     }
