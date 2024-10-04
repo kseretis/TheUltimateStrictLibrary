@@ -23,9 +23,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore --configuration Release
-    - name: Inspect Build Output
-      run: ls -la bin/Release/net8.0/
+      run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Inspect Build Output after test
