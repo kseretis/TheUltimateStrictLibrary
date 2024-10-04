@@ -29,4 +29,4 @@ jobs:
     - name: Pack
       run: dotnet pack --no-build --configuration Release
     - name: Push Nuget Package
-      run: dotnet nuget push **/*.nupkg --source "https://nuget.pkg.github.com/kseretis/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+      run: dotnet nuget push **/*.nupkg --source ${{ REPO_NUGET_PKG_URL }} --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
