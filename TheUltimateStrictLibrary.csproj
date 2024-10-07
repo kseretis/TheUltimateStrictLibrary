@@ -9,7 +9,7 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <Title>The Ultimate Strict Library</Title>
     <Authors>Kleanthis Seretis</Authors>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <RepositoryUrl>https://github.com/kseretis/TheUltimateStrictLibrary</RepositoryUrl>
     <Description>This library contains strict types useful for every single solution. The validation of a field takes place at the property level.</Description>
     <IsPackable>true</IsPackable>
