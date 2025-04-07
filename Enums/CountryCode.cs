@@ -14,7 +14,7 @@
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static CountryCode ToCountryCode(this string value)
+        public static CountryCode GetCountryCodeFromPhoneNumber(this string value)
         {
             // TODO improve this extension
             return CountryCode.Greece;

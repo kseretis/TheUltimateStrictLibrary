@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUltimateStrictLibrary", "TheUltimateStrictLibrary.csproj", "{C11A6924-8D34-445C-9677-75987325466C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUltimateStrictLibraryTests", "TheUltimateStrictLibraryTests\TheUltimateStrictLibraryTests.csproj", "{36431707-33E0-464E-BB14-810DDE5787E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUltimateStrictLibraryTest", "..\TheUltimateStrictLibraryTest\TheUltimateStrictLibraryTest.csproj", "{162AA4A4-77FA-498C-830F-B002FF48013B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{C11A6924-8D34-445C-9677-75987325466C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C11A6924-8D34-445C-9677-75987325466C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C11A6924-8D34-445C-9677-75987325466C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36431707-33E0-464E-BB14-810DDE5787E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36431707-33E0-464E-BB14-810DDE5787E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36431707-33E0-464E-BB14-810DDE5787E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36431707-33E0-464E-BB14-810DDE5787E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162AA4A4-77FA-498C-830F-B002FF48013B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162AA4A4-77FA-498C-830F-B002FF48013B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162AA4A4-77FA-498C-830F-B002FF48013B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162AA4A4-77FA-498C-830F-B002FF48013B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

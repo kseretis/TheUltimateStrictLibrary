@@ -1,23 +1,25 @@
-﻿using TheUltimateStrictLibrary.Enums;
+﻿using System.Text.RegularExpressions;
+using TheUltimateStrictLibrary.Enums;
+using TheUltimateStrictLibrary.Exceptions;
+using TheUltimateStrictLibrary.Extensions;
 using TheUltimateStrictLibrary.Validators;
 
 namespace TheUltimateStrictLibrary.DataTypes
 {
-    public class PhoneNumber
+    public class PhoneNumber : IValidator<string>
     {
-        private CountryCode? _countryCode;
-        private string? _number;
-        
-        public CountryCode? CountryCode { get; }
-        public string? Number { get; }
+        private const int ActualLength = 13;
+ 
+        public CountryCode? CountryCode { get; private set; }
+        public string? Number { get; private set; }
         public string? Value
         {
-            get => _countryCode + _number;
+            get => CountryCode + Number;
             set
             {
-                Validator.IsAPhoneNumber(value);
-                _countryCode = value!.ToCountryCode();
-                _number = value[3..]; // FIXME 
+                ValidateValue(value);
+                CountryCode = value!.GetCountryCodeFromPhoneNumber();
+                Number = value[3..]; // FIXME 
             }
         }
         
@@ -33,6 +35,26 @@ namespace TheUltimateStrictLibrary.DataTypes
         public PhoneNumber(string value)
         {
             Value = value;
+        }
+
+        public override void ValidateValue(string? value)
+        {
+            ValidateIsNotNullOrEmpty(value);
+
+            // TODO
+            value = Regex.Replace(value!, @"\s+", "");
+
+            if (value!.Length.Equals(ActualLength))
+            {
+                throw new InvalidTypeException($"Phone number length should be 13 charachters, 3 for country code and 10 the number!");
+            }
+
+            if (value!.ContainALetter())
+            {
+                throw new InvalidTypeException($"Phone number can not contain any letter!");
+            }
+
+            // TODO contains any other symbol except +
         }
     }
 }

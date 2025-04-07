@@ -1,37 +1,33 @@
-﻿using TheUltimateStrictLibrary.Validators;
+﻿using TheUltimateStrictLibrary.Exceptions;
+using TheUltimateStrictLibrary.Validators;
 
 namespace TheUltimateStrictLibrary.DataTypes
 {
-    public class EMail
+    public class EMail : IValidator<string>
     {
         private const char Dot = '.';
         private const char At = '@';
 
         public string? Address { get; private set; }
-
-        public string? Provider { get; private set; }
-
-        public string? TopLevelDomain { get; private set; }
-
         public string? Domain { get; private set; }
-
+        public string? TopLevelDomain { get; private set; }
         public string? Value
         {
-            get => String.Join(null, Address, At, Domain);
+            get => string.Concat(Address, At, Domain, TopLevelDomain);
             set
             {
-                Validator.IsAnEmail(value);
-                
+                ValidateValue(value);
+
                 var splitValue = value!.Split(At);
                 Address = splitValue.First();
-                Domain = splitValue.Last();
 
-                var splitDomain = Domain.Split(Dot).ToList();
+                var domainPart = splitValue.Last();
+                var splitDomain = domainPart.Split(Dot).ToList();
 
                 TopLevelDomain = splitDomain.Last();
                 splitDomain.Remove(TopLevelDomain);
                 
-                Provider = String.Join(Dot, splitDomain);
+                Domain = string.Join(Dot, splitDomain);
             }
         }
 
@@ -47,6 +43,24 @@ namespace TheUltimateStrictLibrary.DataTypes
         public EMail(string value)
         {
             Value = value;
+        }
+
+        public override void ValidateValue(string? value)
+        {
+            ValidateIsNotNullOrEmpty(value);
+
+            // FIXME 
+            // if (!ContainASymbol(value!))
+            // {
+            //     throw new InvalidTypeException($"Value {value} doesn't contain any symbol");
+            // }
+
+            int numberOfAts = value!.Count(c => c.Equals('@'));
+
+            if (numberOfAts > 1)
+            {
+                throw new InvalidTypeException($"Value {value} contains more than one '@'");
+            }
         }
     }
 }

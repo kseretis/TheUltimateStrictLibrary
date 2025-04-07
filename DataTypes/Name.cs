@@ -1,8 +1,10 @@
-﻿using TheUltimateStrictLibrary.Validators;
+﻿using TheUltimateStrictLibrary.Exceptions;
+using TheUltimateStrictLibrary.Extensions;
+using TheUltimateStrictLibrary.Validators;
 
 namespace TheUltimateStrictLibrary.DataTypes
 {
-    public class Name
+    public class Name : IValidator<string>
     {
         private string? _value;
 
@@ -11,7 +13,7 @@ namespace TheUltimateStrictLibrary.DataTypes
             get => _value;
             set
             {
-                Validator.IsAName(value);
+                ValidateValue(value);
                 _value = value;
             }
         }
@@ -25,9 +27,24 @@ namespace TheUltimateStrictLibrary.DataTypes
         /// Constructor with value and validation
         /// </summary>
         /// <param name="value">The actual name</param>
-        public Name(string value)
+        public Name(string? value)
         {
             Value = value;
+        }
+
+        public override void ValidateValue(string? value)
+        {
+            ValidateIsNotNullOrEmpty(value);
+
+            if (value!.ContainANumber())
+            {
+                throw new InvalidTypeException($"Value: '{value}' contains at least a number!");
+            }
+
+            if (value!.ContainASymbol())
+            {
+                throw new InvalidTypeException($"Value '{value}' contains at least a symbol!");
+            }
         }
     }
 }
