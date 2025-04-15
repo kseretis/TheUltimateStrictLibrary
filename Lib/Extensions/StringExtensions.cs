@@ -19,7 +19,7 @@
 
         public static bool ContainASymbol(this string value)
         {
-            return value.Any(char.IsSymbol);
+            return value.Any(c => !char.IsLetterOrDigit(c) && !char.IsWhiteSpace(c));
         }
 
         public static bool ContainALetter(this string value)

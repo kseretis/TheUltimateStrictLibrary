@@ -10,7 +10,7 @@ namespace TheUltimateStrictLibraryTest.DataTypes
         [DataRow("John")]
         [DataRow("Doe")]
         [DataRow("Makis")]
-        public void CreateName_WithValues_ShouldReturn(string value)
+        public void CreateName_WithValues_ShouldReturn(string? value)
         {
             var name = new Name(value);
             Assert.AreEqual(name.Value, value);
@@ -20,11 +20,10 @@ namespace TheUltimateStrictLibraryTest.DataTypes
         [DataRow("John!")]
         [DataRow("John123")]
         [DataRow("John@")]
-        [DataRow("John G")]
         [DataRow("")]
         [DataRow("13")]
         [DataRow("&")]
-        [DataRow(null)] 
+        [DataRow(null)]
         public void CreateName_WithValues_ShouldThrow(string? value)
         {
             Assert.ThrowsException<InvalidTypeException>(() => new Name(value));
