@@ -1,7 +1,7 @@
-﻿using TheUltimateStrictLibrary.Exceptions;
-using TheUltimateStrictLibrary.Validators;
+﻿using Lib.Exceptions;
+using Lib.Validators;
 
-namespace TheUltimateStrictLibrary.DataTypes
+namespace Lib.DataTypes
 {
     public class EMail : IValidator<string>
     {

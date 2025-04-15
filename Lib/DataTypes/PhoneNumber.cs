@@ -1,10 +1,10 @@
 ﻿using System.Text.RegularExpressions;
-using TheUltimateStrictLibrary.Enums;
-using TheUltimateStrictLibrary.Exceptions;
-using TheUltimateStrictLibrary.Extensions;
-using TheUltimateStrictLibrary.Validators;
+using Lib.Enums;
+using Lib.Exceptions;
+using Lib.Extensions;
+using Lib.Validators;
 
-namespace TheUltimateStrictLibrary.DataTypes
+namespace Lib.DataTypes
 {
     public class PhoneNumber : IValidator<string>
     {

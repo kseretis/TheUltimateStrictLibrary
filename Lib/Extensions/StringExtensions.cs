@@ -1,4 +1,4 @@
-﻿namespace TheUltimateStrictLibrary.Extensions
+﻿namespace Lib.Extensions
 {
     public static class StringExtensions
     {
@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="value"></param>
         /// <returns>True for null/empty values</returns>
-        public static bool IsNullOrEmpty(this string? value)
+        public static bool IsBlank(this string? value)
         {
             return string.IsNullOrEmpty(value);
         }

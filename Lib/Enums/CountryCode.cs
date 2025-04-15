@@ -1,4 +1,4 @@
-﻿namespace TheUltimateStrictLibrary.Enums
+﻿namespace Lib.Enums
 {
     public enum CountryCode
     {

@@ -1,4 +1,4 @@
-﻿namespace TheUltimateStrictLibrary.Exceptions
+﻿namespace Lib.Exceptions
 {
     public class InvalidTypeException : Exception
     {

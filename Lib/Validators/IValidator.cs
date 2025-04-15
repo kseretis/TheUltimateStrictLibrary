@@ -1,7 +1,7 @@
-﻿using TheUltimateStrictLibrary.Exceptions;
-using TheUltimateStrictLibrary.Extensions;
+﻿using Lib.Exceptions;
+using Lib.Extensions;
 
-namespace TheUltimateStrictLibrary.Validators
+namespace Lib.Validators
 {
     public abstract class IValidator<T>
     {
@@ -9,7 +9,7 @@ namespace TheUltimateStrictLibrary.Validators
 
         public void ValidateIsNotNullOrEmpty(string? value)
         {
-            if (value.IsNullOrEmpty())
+            if (value.IsBlank())
             {
                 throw new InvalidTypeException("Value is null/empty!");
             }

@@ -1,8 +1,8 @@
-﻿using TheUltimateStrictLibrary.Exceptions;
-using TheUltimateStrictLibrary.Extensions;
-using TheUltimateStrictLibrary.Validators;
+﻿using Lib.Exceptions;
+using Lib.Extensions;
+using Lib.Validators;
 
-namespace TheUltimateStrictLibrary.DataTypes
+namespace Lib.DataTypes
 {
     public class Name : IValidator<string>
     {
