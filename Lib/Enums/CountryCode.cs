@@ -1,23 +1,22 @@
-﻿namespace Lib.Enums
-{
-    public enum CountryCode
-    {
-        // TODO improve this enum...
-        Greece = 30,
-        Mexico = 52
-    }
+﻿namespace TheUltimateStrictLibrary.Enums;
 
-    public static class CountryCodeExtension
+public enum CountryCode
+{
+    // TODO improve this enum...
+    Greece = 30,
+    Mexico = 52
+}
+
+public static class CountryCodeExtension
+{
+    /// <summary>
+    /// Map the string to a country code value
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static CountryCode GetCountryCodeFromPhoneNumber(this string value)
     {
-        /// <summary>
-        /// Map the string to a country code value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static CountryCode GetCountryCodeFromPhoneNumber(this string value)
-        {
-            // TODO improve this extension
-            return CountryCode.Greece;
-        }   
-    }
+        // TODO improve this extension
+        return CountryCode.Greece;
+    }   
 }

@@ -1,18 +1,17 @@
-﻿using Lib.Exceptions;
-using Lib.Extensions;
+﻿using TheUltimateStrictLibrary.Exceptions;
+using TheUltimateStrictLibrary.Extensions;
 
-namespace Lib.Validators
+namespace TheUltimateStrictLibrary.Validators;
+
+public abstract class IValidator<T>
 {
-    public abstract class IValidator<T>
-    {
-        public abstract void ValidateValue(T? value);
+    public abstract void ValidateValue(T? value);
 
-        public void ValidateIsNotNullOrEmpty(string? value)
+    public void ValidateIsNotNullOrEmpty(string? value)
+    {
+        if (value.IsBlank())
         {
-            if (value.IsBlank())
-            {
-                throw new InvalidTypeException("Value is null/empty!");
-            }
+            throw new InvalidTypeException("Value is null/empty!");
         }
     }
 }

@@ -1,50 +1,49 @@
-﻿using Lib.Exceptions;
-using Lib.Extensions;
-using Lib.Validators;
+﻿using TheUltimateStrictLibrary.Exceptions;
+using TheUltimateStrictLibrary.Extensions;
+using TheUltimateStrictLibrary.Validators;
 
-namespace Lib.DataTypes
+namespace TheUltimateStrictLibrary.DataTypes;
+
+public class Name : IValidator<string>
 {
-    public class Name : IValidator<string>
+    private string? _value;
+
+    public string? Value
     {
-        private string? _value;
-
-        public string? Value
+        get => _value;
+        set
         {
-            get => _value;
-            set
-            {
-                ValidateValue(value);
-                _value = value;
-            }
+            ValidateValue(value);
+            _value = value;
         }
-        
-        /// <summary>
-        /// Empty Constructor
-        /// </summary>
-        public Name() { }
+    }
+    
+    /// <summary>
+    /// Empty Constructor
+    /// </summary>
+    public Name() { }
 
-        /// <summary>
-        /// Constructor with value and validation
-        /// </summary>
-        /// <param name="value">The actual name</param>
-        public Name(string? value)
+    /// <summary>
+    /// Constructor with value and validation
+    /// </summary>
+    /// <param name="value">The actual name</param>
+    public Name(string? value)
+    {
+        Value = value;
+    }
+
+    public override void ValidateValue(string? value)
+    {
+        ValidateIsNotNullOrEmpty(value);
+
+        if (value!.ContainANumber())
         {
-            Value = value;
+            throw new InvalidTypeException($"Value: '{value}' contains at least a number!");
         }
 
-        public override void ValidateValue(string? value)
+        if (value!.ContainASymbol())
         {
-            ValidateIsNotNullOrEmpty(value);
-
-            if (value!.ContainANumber())
-            {
-                throw new InvalidTypeException($"Value: '{value}' contains at least a number!");
-            }
-
-            if (value!.ContainASymbol())
-            {
-                throw new InvalidTypeException($"Value '{value}' contains at least a symbol!");
-            }
+            throw new InvalidTypeException($"Value '{value}' contains at least a symbol!");
         }
     }
 }

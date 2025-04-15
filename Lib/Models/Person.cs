@@ -1,4 +1,4 @@
-﻿using Lib.DataTypes;
+﻿using TheUltimateStrictLibrary.DataTypes;
 
 namespace TheUltimateStrictLibrary.Models;
 
