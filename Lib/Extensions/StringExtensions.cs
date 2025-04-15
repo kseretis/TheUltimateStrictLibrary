@@ -9,7 +9,7 @@
         /// <returns>True for null/empty values</returns>
         public static bool IsBlank(this string? value)
         {
-            return string.IsNullOrEmpty(value);
+            return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
         }
 
         public static bool ContainANumber(this string value)
