@@ -7,6 +7,8 @@ public abstract class IValidator<T>
 {
     public abstract void ValidateValue(T? value);
 
+    public abstract bool HasValue();
+
     public void ValidateIsNotNullOrEmpty(string? value)
     {
         if (value.IsBlank())

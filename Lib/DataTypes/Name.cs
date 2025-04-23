@@ -27,6 +27,11 @@ public class Name : IValidator<string>
         Value = value;
     }
 
+    public override bool HasValue()
+    {
+        return !Value.IsBlank();
+    }
+
     public override void ValidateValue(string? value)
     {
         ValidateIsNotNullOrEmpty(value);

@@ -1,4 +1,5 @@
 ﻿using TheUltimateStrictLibrary.Exceptions;
+using TheUltimateStrictLibrary.Extensions;
 using TheUltimateStrictLibrary.Validators;
 
 namespace TheUltimateStrictLibrary.DataTypes;
@@ -38,6 +39,11 @@ public class EMail : IValidator<string>
     public EMail(string? value)
     {
         Value = value;
+    }
+
+    public override bool HasValue()
+    {
+        return !Value.IsBlank();
     }
 
     public override void ValidateValue(string? value)
