@@ -32,15 +32,10 @@ public class EMail : IValidator<string>
     }
 
     /// <summary>
-    /// Empty Constructor
-    /// </summary>
-    public EMail() { }
-
-    /// <summary>
     /// Constructor with value and validation
     /// </summary>
     /// <param name="value">The whole email address</param>
-    public EMail(string value)
+    public EMail(string? value)
     {
         Value = value;
     }
@@ -59,7 +54,7 @@ public class EMail : IValidator<string>
 
         if (numberOfAts > 1)
         {
-            throw new InvalidTypeException($"Value {value} contains more than one '@'");
+            throw new InvalidTypeException($"Value '{value}' of type '{this}', contains more than one '@'");
         }
     }
 }

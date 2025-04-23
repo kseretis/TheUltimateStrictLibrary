@@ -11,7 +11,7 @@ public abstract class IValidator<T>
     {
         if (value.IsBlank())
         {
-            throw new InvalidTypeException("Value is null/empty!");
+            throw new InvalidTypeException( $"Value of type '{this}' can't be null/empty!");
         }
     }
 }

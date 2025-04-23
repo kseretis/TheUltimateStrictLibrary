@@ -24,15 +24,10 @@ public class PhoneNumber : IValidator<string>
     }
     
     /// <summary>
-    /// Empty Constructor
-    /// </summary>
-    public PhoneNumber() { }
-
-    /// <summary>
     /// Constructor with value and validation
     /// </summary>
     /// <param name="value">The complete phone number (eg: +30 6979978486) </param>
-    public PhoneNumber(string value)
+    public PhoneNumber(string? value)
     {
         Value = value;
     }
@@ -46,12 +41,12 @@ public class PhoneNumber : IValidator<string>
 
         if (value!.Length.Equals(ActualLength))
         {
-            throw new InvalidTypeException($"Phone number length should be 13 charachters, 3 for country code and 10 the number!");
+            throw new InvalidTypeException($"Value's length of type '{this}' must be 13 charachters, 3 for country code and 10 the actual number!");
         }
 
         if (value!.ContainALetter())
         {
-            throw new InvalidTypeException($"Phone number can not contain any letter!");
+            throw new InvalidTypeException($"Value of type '{this}' mustn't contain any letter!");
         }
 
         // TODO contains any other symbol except +

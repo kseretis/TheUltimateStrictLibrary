@@ -19,11 +19,6 @@ public class Name : IValidator<string>
     }
     
     /// <summary>
-    /// Empty Constructor
-    /// </summary>
-    public Name() { }
-
-    /// <summary>
     /// Constructor with value and validation
     /// </summary>
     /// <param name="value">The actual name</param>
@@ -38,12 +33,12 @@ public class Name : IValidator<string>
 
         if (value!.ContainANumber())
         {
-            throw new InvalidTypeException($"Value: '{value}' contains at least a number!");
+            throw new InvalidTypeException($"Value '{value}' of type '{this}', contains at least a number!");
         }
 
         if (value!.ContainASymbol())
         {
-            throw new InvalidTypeException($"Value '{value}' contains at least a symbol!");
+            throw new InvalidTypeException($"Value '{value}' of type '{this}', contains at least a symbol!");
         }
     }
 }
