@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{D5CA968F-DB8A-4BC1-81EF-59EE7D3D9D8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{D5CA968F-DB8A-4BC1-81EF-59EE7D3D9D8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUltimateStrictLibraryTest", "TheUltimateStrictLibraryTest\TheUltimateStrictLibraryTest.csproj", "{5357A080-49CA-456B-B974-707B2682524B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{5357A080-49CA-456B-B974-707B2682524B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
