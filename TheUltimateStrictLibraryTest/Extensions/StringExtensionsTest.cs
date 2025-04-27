@@ -22,9 +22,9 @@ public class StringExtensionsTest
     [DataRow("", false)]
     [DataRow(" ", false)]
     [DataRow("abc 123", true)]
-    public void ContainANumber_WithValue_ShouldReturn(string value, bool shouldBe)
+    public void ContainsNumber_WithValue_ShouldReturn(string value, bool shouldBe)
     {
-        Assert.AreEqual(value.ContainANumber(), shouldBe);
+        Assert.AreEqual(value.ContainsNumber(), shouldBe);
     }
 
     [TestMethod]
@@ -35,9 +35,9 @@ public class StringExtensionsTest
     [DataRow("", false)]
     [DataRow(" ", false)]
     [DataRow("abc 123", false)]
-    public void ContainASymbol_WithValue_ShouldReturn(string value, bool shouldBe)
+    public void ContainsSymbol_WithValue_ShouldReturn(string value, bool shouldBe)
     {
-        Assert.AreEqual(value.ContainASymbol(), shouldBe);
+        Assert.AreEqual(value.ContainsSymbol(), shouldBe);
     }
 
     [TestMethod]
@@ -48,8 +48,22 @@ public class StringExtensionsTest
     [DataRow("", false)]
     [DataRow(" ", false)]
     [DataRow("abc 123", true)]
-    public void ContainALetter_WithValue_ShouldReturn(string value, bool shouldBe)
+    public void ContainsLetter_WithValue_ShouldReturn(string value, bool shouldBe)
     {
-        Assert.AreEqual(value.ContainALetter(), shouldBe);
+        Assert.AreEqual(value.ContainsLetter(), shouldBe);
+    }
+
+    [TestMethod]
+    [DataRow("abc", false)]
+    [DataRow("abcτθ", true)]
+    [DataRow("του", true)]
+    [DataRow("θζ-makis", true)]
+    [DataRow("Μακης", true)]
+    [DataRow("makisά", true)]
+    [DataRow("", false)]
+    [DataRow(" ", false)]
+    public void ContainsNonLatinCharacter_WithValues_ShouldReturn(string value, bool shouldBe)
+    {
+        Assert.AreEqual(value.ContainsNonLatinCharacters(), shouldBe);
     }
 }

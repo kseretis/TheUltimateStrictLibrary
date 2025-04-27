@@ -1,49 +1,43 @@
 ﻿using TheUltimateStrictLibrary.Exceptions;
 using TheUltimateStrictLibrary.Extensions;
-using TheUltimateStrictLibrary.Validators;
+using TheUltimateStrictLibrary.DataTypes;
 
 namespace TheUltimateStrictLibrary.DataTypes;
 
-public class Name : IValidator<string>
+public class Name : DataType<string>
 {
-    private string? _value;
-
-    public string? Value
+    public override string Value
     {
-        get => _value;
-        set
+        get => value;
+        protected set
         {
             ValidateValue(value);
-            _value = value;
+            base.value = value;
         }
     }
-    
-    /// <summary>
-    /// Constructor with value and validation
-    /// </summary>
-    /// <param name="value">The actual name</param>
-    public Name(string? value)
+
+    public Name(string value)
     {
         Value = value;
     }
-
-    public override bool HasValue()
+    
+    public override void ValidateValue(string arg)
     {
-        return !Value.IsBlank();
-    }
+        ValidateIsNotNull(arg);
 
-    public override void ValidateValue(string? value)
-    {
-        ValidateIsNotNullOrEmpty(value);
-
-        if (value!.ContainANumber())
+        if (arg.IsBlank())
         {
-            throw new InvalidTypeException($"Value '{value}' of type '{this}', contains at least a number!");
+            throw new InvalidTypeException($"Value '{arg}' of type '{this}', can't be empty!");
         }
 
-        if (value!.ContainASymbol())
+        if (arg.ContainsNumber())
         {
-            throw new InvalidTypeException($"Value '{value}' of type '{this}', contains at least a symbol!");
+            throw new InvalidTypeException($"Value '{arg}' of type '{this}', contains at least a number!");
+        }
+
+        if (arg.ContainsSymbol())
+        {
+            throw new InvalidTypeException($"Value '{arg}' of type '{this}', contains at least a symbol!");
         }
     }
 }

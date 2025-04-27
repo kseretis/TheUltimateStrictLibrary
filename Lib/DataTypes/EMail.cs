@@ -1,21 +1,22 @@
 ﻿using TheUltimateStrictLibrary.Exceptions;
 using TheUltimateStrictLibrary.Extensions;
-using TheUltimateStrictLibrary.Validators;
+using TheUltimateStrictLibrary.DataTypes;
 
 namespace TheUltimateStrictLibrary.DataTypes;
 
-public class EMail : IValidator<string>
+public class EMail : DataType<string>
 {
     private const char Dot = '.';
     private const char At = '@';
 
-    public string? Address { get; private set; }
-    public string? Domain { get; private set; }
-    public string? TopLevelDomain { get; private set; }
-    public string? Value
+    public string Address { get; private set; } = null!;
+    public string Domain { get; private set; } = null!;
+    public string TopLevelDomain { get; private set; } = null!;
+    
+    public override string Value
     {
         get => string.Concat(Address, At, Domain, TopLevelDomain);
-        set
+        protected set
         {
             ValidateValue(value);
 
@@ -32,35 +33,30 @@ public class EMail : IValidator<string>
         }
     }
 
-    /// <summary>
-    /// Constructor with value and validation
-    /// </summary>
-    /// <param name="value">The whole email address</param>
-    public EMail(string? value)
+    public EMail(string value)
     {
         Value = value;
     }
-
-    public override bool HasValue()
+    
+    public override void ValidateValue(string arg)
     {
-        return !Value.IsBlank();
-    }
+        ValidateIsNotNull(arg);
+        
+        if (arg.IsBlank())
+        {
+            throw new InvalidTypeException($"Value '{arg}' of type '{this}', can't be empty!");
+        }
 
-    public override void ValidateValue(string? value)
-    {
-        ValidateIsNotNullOrEmpty(value);
-
-        // FIXME 
-        // if (!ContainASymbol(value!))
-        // {
-        //     throw new InvalidTypeException($"Value {value} doesn't contain any symbol");
-        // }
-
-        int numberOfAts = value!.Count(c => c.Equals('@'));
+        if (arg!.ContainsWhiteSpace())
+        {
+            throw new InvalidTypeException($"Value '{arg}' of type '{this}', mustn't contain any whitespace");
+        }
+        
+        var numberOfAts = arg!.Count(c => c.Equals(At));
 
         if (numberOfAts > 1)
         {
-            throw new InvalidTypeException($"Value '{value}' of type '{this}', contains more than one '@'");
+            throw new InvalidTypeException($"Value '{arg}' of type '{this}', contains more than one '@'");
         }
     }
 }

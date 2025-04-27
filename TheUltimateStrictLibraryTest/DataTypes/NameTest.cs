@@ -10,7 +10,7 @@ public class NameTest
     [DataRow("John")]
     [DataRow("Doe")]
     [DataRow("Makis")]
-    public void CreateName_WithValues_ShouldReturn(string? value)
+    public void CreateName_WithValues_ShouldReturn(string value)
     {
         var name = new Name(value);
         Assert.AreEqual(name.Value, value);
