@@ -9,16 +9,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AString_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003F13e79b2a7b78394ccf591d3454bff5bfb14e692da011a7e38b66c2312b365a_003FString_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATestMethodInfo_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003F5ef53d675c5d34a6b85963919015dc0c1b06e5ea9834aac59ae6911f4c6f38_003FTestMethodInfo_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=68f967e3_002D089c_002D4926_002Db5e0_002D926f83c69e18/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ContainsNonLatinCharacter_WithValues_ShouldReturn" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;MSTest::5357A080-49CA-456B-B974-707B2682524B::net8.0::TheUltimateStrictLibraryTest.Extensions.StringExtensionsTest.ContainsNonLatinCharacter_WithValues_ShouldReturn&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::5357A080-49CA-456B-B974-707B2682524B::net8.0::TheUltimateStrictLibraryTest.DataTypes.NameTest.CreateName_WithValues_ShouldReturn&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::5357A080-49CA-456B-B974-707B2682524B::net8.0::TheUltimateStrictLibraryTest.DataTypes.NameTest.CreateName_WithValues_ShouldThrow&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::5357A080-49CA-456B-B974-707B2682524B::net8.0::Tests.Extensions.StringExtensionsTest.ContainsMoreThanOneAtInTheRow_WithValues_ShouldReturn&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;MSTest::5357A080-49CA-456B-B974-707B2682524B::net8.0::Tests.Extensions.StringExtensionsTest&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-    &lt;ProjectFile&gt;5357A080-49CA-456B-B974-707B2682524B/d:DataTypes/f:NameTest.cs&lt;/ProjectFile&gt;&#xD;
-  &lt;/Or&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7bbc98de_002D9248_002D47e0_002D8de5_002D8b74c6d3d62c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ContainsNonLatinCharacter_WithValues_ShouldReturn #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;

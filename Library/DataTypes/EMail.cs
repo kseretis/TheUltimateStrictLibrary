@@ -74,6 +74,8 @@ public class EMail : DataType<string>
         {
             throw new InvalidDataTypeException(arg, this, "contains more than one underscore in the row!");
         }
+        
+        //TODO: the domain must only contain dots from symbols 
 
         if (arg.ContainsNonLatinCharacters())
         {
