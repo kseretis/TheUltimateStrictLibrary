@@ -14,7 +14,7 @@ public abstract class DataType<T>
     {
         if (arg is null)
         {
-            throw new InvalidTypeException( $"Value of type '{this}' can't be null!");
+            throw new InvalidDataTypeException( $"Value of type '{this}' can't be null!");
         }
     }
 }

@@ -5,10 +5,10 @@ namespace TheUltimateStrictLibrary.Extensions;
 public static class StringExtensions
 {
     /// <summary>
-    /// Checks if a string is null or empty
+    /// A string could be null/empty or has only spaces
     /// </summary>
     /// <param name="value"></param>
-    /// <returns>True for null/empty values</returns>
+    /// <returns></returns>
     public static bool IsBlank(this string? value)
     {
         return string.IsNullOrWhiteSpace(value);

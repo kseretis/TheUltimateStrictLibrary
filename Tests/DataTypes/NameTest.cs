@@ -1,7 +1,7 @@
 ﻿using TheUltimateStrictLibrary.DataTypes;
 using TheUltimateStrictLibrary.Exceptions;
 
-namespace TheUltimateStrictLibraryTest.DataTypes;
+namespace Tests.DataTypes;
 
 [TestClass]
 public class NameTest
@@ -26,6 +26,6 @@ public class NameTest
     [DataRow(null)]
     public void CreateName_WithValues_ShouldThrow(string? value)
     {
-        Assert.ThrowsException<InvalidTypeException>(() => new Name(value));
+        Assert.ThrowsException<InvalidDataTypeException>(() => new Name(value));
     }
 }

@@ -1,4 +1,4 @@
-namespace TheUltimateStrictLibraryTest.DataTypes;
+namespace Tests.DataTypes;
 
 [TestClass]
 public class EMailTest

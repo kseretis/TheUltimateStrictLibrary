@@ -35,7 +35,7 @@ public class PhoneNumber : DataType<string>
         
         if (arg.IsBlank())
         {
-            throw new InvalidTypeException($"Value '{arg}' of type '{this}', can't be empty!");
+            throw new InvalidDataTypeException(arg, this, "can't be empty!");
         }
 
         // TODO
@@ -43,12 +43,12 @@ public class PhoneNumber : DataType<string>
 
         if (arg!.Length.Equals(ActualLength))
         {
-            throw new InvalidTypeException($"Value's length of type '{this}' must be 13 characters, 3 for country code and 10 the actual number!");
+            throw new InvalidDataTypeException($"Value's length of type '{this}' must be 13 characters, 3 for country code and 10 the actual number!");
         }
 
         if (arg!.ContainsLetter())
         {
-            throw new InvalidTypeException($"Value of type '{this}' mustn't contain any letter!");
+            throw new InvalidDataTypeException(arg, this, "mustn't contain any letter!");
         }
 
         // TODO contains any other symbol except +

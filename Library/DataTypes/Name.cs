@@ -27,17 +27,17 @@ public class Name : DataType<string>
 
         if (arg.IsBlank())
         {
-            throw new InvalidTypeException($"Value '{arg}' of type '{this}', can't be empty!");
+            throw new InvalidDataTypeException(arg, this, "can't be empty!");
         }
 
         if (arg.ContainsNumber())
         {
-            throw new InvalidTypeException($"Value '{arg}' of type '{this}', contains at least a number!");
+            throw new InvalidDataTypeException(arg, this, "contains at least a number!");
         }
 
         if (arg.ContainsSymbol())
         {
-            throw new InvalidTypeException($"Value '{arg}' of type '{this}', contains at least a symbol!");
+            throw new InvalidDataTypeException(arg, this, "contains at least a symbol!");
         }
     }
 }

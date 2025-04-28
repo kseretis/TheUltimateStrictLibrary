@@ -44,19 +44,23 @@ public class EMail : DataType<string>
         
         if (arg.IsBlank())
         {
-            throw new InvalidTypeException($"Value '{arg}' of type '{this}', can't be empty!");
+            throw new InvalidDataTypeException(arg, this, "can't be empty or contain any whitespace!");
         }
 
-        if (arg!.ContainsWhiteSpace())
-        {
-            throw new InvalidTypeException($"Value '{arg}' of type '{this}', mustn't contain any whitespace");
-        }
+        var a = this;
         
-        var numberOfAts = arg!.Count(c => c.Equals(At));
-
+        // Check for invalid symbol occurrences
+        var numberOfAts = arg.Count(c => c.Equals(At));
         if (numberOfAts > 1)
         {
-            throw new InvalidTypeException($"Value '{arg}' of type '{this}', contains more than one '@'");
+            throw new InvalidDataTypeException(arg, this, "contains more than one '@'");
+        }
+        
+        // TODO contains any symbol except - _ ., can't contain two of these in the row
+
+        if (arg.ContainsNonLatinCharacters())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains at least one non latin character!");
         }
     }
 }
