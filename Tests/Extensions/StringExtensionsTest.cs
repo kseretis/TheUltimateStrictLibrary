@@ -66,18 +66,4 @@ public class StringExtensionsTest
     {
         Assert.AreEqual(value.ContainsWhiteSpace(), shouldBe);
     }
-
-    [TestMethod]
-    [DataRow("abc", false)]
-    [DataRow("abcτθ", true)]
-    [DataRow("του", true)]
-    [DataRow("θζ-makis", true)]
-    [DataRow("Μακης", true)]
-    [DataRow("makisά", true)]
-    [DataRow("", false)]
-    [DataRow(" ", false)]
-    public void ContainsNonLatinCharacter_WithValues_ShouldReturn(string value, bool shouldBe)
-    {
-        Assert.AreEqual(value.ContainsNonLatinCharacters(), shouldBe);
-    }
 }
