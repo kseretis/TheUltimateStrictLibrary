@@ -1,35 +1,32 @@
 ﻿using TheUltimateStrictLibrary.Exceptions;
 using TheUltimateStrictLibrary.Extensions;
-using TheUltimateStrictLibrary.DataTypes;
+using TheUltimateStrictLibrary.Enums;
 
 namespace TheUltimateStrictLibrary.DataTypes;
 
 public class EMail : DataType<string>
 {
-    private const char Dot = '.';
-    private const char At = '@';
-
     public string Address { get; private set; } = null!;
     public string Domain { get; private set; } = null!;
     public string TopLevelDomain { get; private set; } = null!;
     
     public override string Value
     {
-        get => string.Concat(Address, At, Domain, TopLevelDomain);
+        get => string.Concat(Address, Symbols.At, Domain, TopLevelDomain);
         protected set
         {
             ValidateValue(value);
 
-            var splitValue = value!.Split(At);
+            var splitValue = value!.Split(Symbols.At);
             Address = splitValue.First();
 
             var domainPart = splitValue.Last();
-            var splitDomain = domainPart.Split(Dot).ToList();
+            var splitDomain = domainPart.Split(Symbols.Dot).ToList();
 
             TopLevelDomain = splitDomain.Last();
             splitDomain.Remove(TopLevelDomain);
             
-            Domain = string.Join(Dot, splitDomain);
+            Domain = string.Join(Symbols.Dot, splitDomain);
         }
     }
 
@@ -47,20 +44,58 @@ public class EMail : DataType<string>
             throw new InvalidDataTypeException(arg, this, "can't be empty or contain any whitespace!");
         }
 
-        var a = this;
+        var symbols = GetSymbolsFromString(arg);
         
-        // Check for invalid symbol occurrences
-        var numberOfAts = arg.Count(c => c.Equals(At));
-        if (numberOfAts > 1)
+        if (AreSymbolsUnacceptable(symbols))
         {
-            throw new InvalidDataTypeException(arg, this, "contains more than one '@'");
+            throw new InvalidDataTypeException(arg, this, "mustn't contain unacceptable symbols!");
+        }
+
+        var numberOfAts = symbols.Count(s => s.Equals(Symbols.At));
+        if (numberOfAts is > 1 or 0)
+        {
+            throw new InvalidDataTypeException(arg, this, "contains zero or more than one '@'!");
         }
         
-        // TODO contains any symbol except - _ ., can't contain two of these in the row
+        var numberOfDots = symbols.Count(s => s.Equals(Symbols.Dot));
+        if (numberOfDots > 1 && arg.ContainsMoreThanOneDotInTheRow())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains more than one dots in the row!");
+        }
+
+        var numberOfHyphens = symbols.Count(s => s.Equals(Symbols.Hyphen));
+        if (numberOfHyphens > 1 && arg.ContainsMoreThanOneHyphenInTheRow())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains more than one hyphen in the row!");
+        }
+        
+        var numberOfUnderscores = symbols.Count(s => s.Equals(Symbols.Underscore));
+        if (numberOfUnderscores > 1 && arg.ContainsMoreThanOneUnderscoreInTheRow())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains more than one underscore in the row!");
+        }
 
         if (arg.ContainsNonLatinCharacters())
         {
             throw new InvalidDataTypeException(arg, this, "contains at least one non latin character!");
         }
+    }
+    
+    private static List<char> GetSymbolsFromString(string value)
+    {
+        List<char> symbols = [];
+        
+        var charArray = value.ToCharArray();
+        
+        symbols.AddRange(charArray.Where(c => !char.IsLetterOrDigit(c)));
+
+        return symbols;
+    }
+
+    private static bool AreSymbolsUnacceptable(List<char> symbols)
+    {
+        return symbols.Where(s =>
+            !(s.Equals(Symbols.At) || s.Equals(Symbols.Dot) || s.Equals(Symbols.Hyphen) ||
+              s.Equals(Symbols.Underscore))).ToList().Count > 0;
     }
 }

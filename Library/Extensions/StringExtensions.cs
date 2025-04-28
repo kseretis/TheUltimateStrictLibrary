@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace TheUltimateStrictLibrary.Extensions;
+﻿namespace TheUltimateStrictLibrary.Extensions;
 
 public static class StringExtensions
 {
@@ -32,10 +30,5 @@ public static class StringExtensions
     public static bool ContainsWhiteSpace(this string value)
     {
         return value.Any(char.IsWhiteSpace);
-    }
-
-    public static bool ContainsNonLatinCharacters(this string value)
-    {
-        return Regex.IsMatch(value, @"[^\u0000-\u024F]", RegexOptions.None);
     }
 }
