@@ -28,4 +28,23 @@ public class NameTest
     {
         Assert.ThrowsException<InvalidDataTypeException>(() => new Name(value));
     }
+
+    [TestMethod]
+    [DataRow("John", "Johny")]
+    [DataRow("Maakis", "Makis")]
+    public void UpdateName_WithValues_ShouldReturn(string initValue, string updatedValue)
+    {
+        var name = new Name(initValue);
+        name.Value = updatedValue;
+        Assert.AreEqual(name.Value, updatedValue);
+    }
+    
+    [TestMethod]
+    [DataRow("John", "John1")]
+    [DataRow("Makis", "Mak!s")]
+    public void UpdateName_WithValues_ShouldThrow(string initValue, string updatedValue)
+    {
+        var name = new Name(initValue);
+        Assert.ThrowsException<InvalidDataTypeException>(() => name.Value = updatedValue);
+    }
 }

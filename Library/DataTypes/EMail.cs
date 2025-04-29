@@ -12,8 +12,8 @@ public class EMail : DataType<string>
     
     public override string Value
     {
-        get => string.Concat(Address, Symbols.At, Domain, TopLevelDomain);
-        protected set
+        get => string.Concat(Address, Symbols.At, Domain, Symbols.Dot, TopLevelDomain);
+        set
         {
             ValidateValue(value);
 

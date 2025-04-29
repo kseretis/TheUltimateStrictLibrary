@@ -1,6 +1,5 @@
 ﻿using TheUltimateStrictLibrary.Exceptions;
 using TheUltimateStrictLibrary.Extensions;
-using TheUltimateStrictLibrary.DataTypes;
 
 namespace TheUltimateStrictLibrary.DataTypes;
 
@@ -9,7 +8,7 @@ public class Name : DataType<string>
     public override string Value
     {
         get => value;
-        protected set
+        set
         {
             ValidateValue(value);
             base.value = value;
@@ -18,6 +17,12 @@ public class Name : DataType<string>
 
     public Name(string value)
     {
+        Value = value;
+    }
+
+    public Name(string value, CustomValidation extraValidation)
+    {
+        ExtraValidation = extraValidation;
         Value = value;
     }
     
@@ -29,15 +34,24 @@ public class Name : DataType<string>
         {
             throw new InvalidDataTypeException(arg, this, "can't be empty!");
         }
-
-        if (arg.ContainsNumber())
+        
+        if (OverrideDefaultValidation is not null)
         {
-            throw new InvalidDataTypeException(arg, this, "contains at least a number!");
+            OverrideDefaultValidation(arg);
+        }
+        else
+        {
+            if (arg.ContainsNumber())
+            {
+                throw new InvalidDataTypeException(arg, this, "contains at least a number!");
+            }
+
+            if (arg.ContainsSymbol())
+            {
+                throw new InvalidDataTypeException(arg, this, "contains at least a symbol!");
+            }
         }
 
-        if (arg.ContainsSymbol())
-        {
-            throw new InvalidDataTypeException(arg, this, "contains at least a symbol!");
-        }
+        ExtraValidation?.Invoke(arg);
     }
 }

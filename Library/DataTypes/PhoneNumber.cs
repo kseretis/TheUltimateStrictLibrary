@@ -16,7 +16,7 @@ public class PhoneNumber : DataType<string>
     public override string Value
     {
         get => CountryCode + Number;
-        protected set
+        set
         {
             ValidateValue(value);
             CountryCode = value!.GetCountryCodeFromPhoneNumber();
