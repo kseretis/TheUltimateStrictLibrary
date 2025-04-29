@@ -12,8 +12,8 @@ public class EMail : DataType<string>
     
     public override string Value
     {
-        get => string.Concat(Address, Symbols.At, Domain, TopLevelDomain);
-        protected set
+        get => string.Concat(Address, Symbols.At, Domain, Symbols.Dot, TopLevelDomain);
+        set
         {
             ValidateValue(value);
 
@@ -43,44 +43,53 @@ public class EMail : DataType<string>
         {
             throw new InvalidDataTypeException(arg, this, "can't be empty or contain any whitespace!");
         }
-
-        var symbols = GetSymbolsFromString(arg);
         
-        if (AreSymbolsUnacceptable(symbols))
+        if (OverrideDefaultValidation is not null)
         {
-            throw new InvalidDataTypeException(arg, this, "mustn't contain unacceptable symbols!");
+            OverrideDefaultValidation(arg);
+        }
+        else
+        {
+            var symbols = GetSymbolsFromString(arg);
+            
+            if (AreSymbolsUnacceptable(symbols))
+            {
+                throw new InvalidDataTypeException(arg, this, "mustn't contain unacceptable symbols!");
+            }
+
+            var numberOfAts = symbols.Count(s => s.Equals(Symbols.At));
+            if (numberOfAts is > 1 or 0)
+            {
+                throw new InvalidDataTypeException(arg, this, "contains zero or more than one '@'!");
+            }
+            
+            var numberOfDots = symbols.Count(s => s.Equals(Symbols.Dot));
+            if (numberOfDots > 1 && arg.ContainsMoreThanOneDotInTheRow())
+            {
+                throw new InvalidDataTypeException(arg, this, "contains more than one dots in the row!");
+            }
+
+            var numberOfHyphens = symbols.Count(s => s.Equals(Symbols.Hyphen));
+            if (numberOfHyphens > 1 && arg.ContainsMoreThanOneHyphenInTheRow())
+            {
+                throw new InvalidDataTypeException(arg, this, "contains more than one hyphen in the row!");
+            }
+            
+            var numberOfUnderscores = symbols.Count(s => s.Equals(Symbols.Underscore));
+            if (numberOfUnderscores > 1 && arg.ContainsMoreThanOneUnderscoreInTheRow())
+            {
+                throw new InvalidDataTypeException(arg, this, "contains more than one underscore in the row!");
+            }
+            
+            //TODO: the domain must only contain dots from symbols 
+
+            if (arg.ContainsNonLatinCharacters())
+            {
+                throw new InvalidDataTypeException(arg, this, "contains at least one non latin character!");
+            }
         }
 
-        var numberOfAts = symbols.Count(s => s.Equals(Symbols.At));
-        if (numberOfAts is > 1 or 0)
-        {
-            throw new InvalidDataTypeException(arg, this, "contains zero or more than one '@'!");
-        }
-        
-        var numberOfDots = symbols.Count(s => s.Equals(Symbols.Dot));
-        if (numberOfDots > 1 && arg.ContainsMoreThanOneDotInTheRow())
-        {
-            throw new InvalidDataTypeException(arg, this, "contains more than one dots in the row!");
-        }
-
-        var numberOfHyphens = symbols.Count(s => s.Equals(Symbols.Hyphen));
-        if (numberOfHyphens > 1 && arg.ContainsMoreThanOneHyphenInTheRow())
-        {
-            throw new InvalidDataTypeException(arg, this, "contains more than one hyphen in the row!");
-        }
-        
-        var numberOfUnderscores = symbols.Count(s => s.Equals(Symbols.Underscore));
-        if (numberOfUnderscores > 1 && arg.ContainsMoreThanOneUnderscoreInTheRow())
-        {
-            throw new InvalidDataTypeException(arg, this, "contains more than one underscore in the row!");
-        }
-        
-        //TODO: the domain must only contain dots from symbols 
-
-        if (arg.ContainsNonLatinCharacters())
-        {
-            throw new InvalidDataTypeException(arg, this, "contains at least one non latin character!");
-        }
+        ExtraValidation?.Invoke(arg);
     }
     
     private static List<char> GetSymbolsFromString(string value)

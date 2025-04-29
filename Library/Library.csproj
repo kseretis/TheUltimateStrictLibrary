@@ -10,10 +10,9 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <Title>The Ultimate Strict Library</Title>
     <Authors>Kleanthis Seretis</Authors>
-    <Version>0.3.5-alpha</Version>
+    <Version>0.4.0-alpha</Version>
     <RepositoryUrl>https://github.com/kseretis/TheUltimateStrictLibrary</RepositoryUrl>
-    <Description>This library contains strict types useful for every single solution. The validation
-      of a field takes place at the property level.</Description>
+    <Description>A delegate introduced to the DataType. It is used to override the default validation of a DataType or to add an extra validation.</Description>
     <IsPackable>true</IsPackable>
     <PackageReadmeFile>nuget-readme.md</PackageReadmeFile>
   </PropertyGroup>

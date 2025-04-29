@@ -14,7 +14,9 @@ public class EMailTest
     [DataRow("Mk.das-re_of@test.com")]
     public void CreateEMail_WithValues_ShouldReturn(string value)
     {
-        Assert.IsNotNull(new EMail(value));
+        var email = new EMail(value);
+        Assert.IsNotNull(email);
+        Assert.AreEqual(email.Value, value);
     }
     
     [TestMethod]
@@ -38,5 +40,26 @@ public class EMailTest
     {
         var exception = Assert.ThrowsException<InvalidDataTypeException>(() => new EMail(value));
         Assert.IsTrue(exception.Message.Contains(exceptionMessage));
+    }
+    
+    [TestMethod]
+    [DataRow("makis@test.com", "makis2@test.com")]
+    [DataRow("makis.das@test.com", "makis.das@test.gr.com")]
+    [DataRow("makis.das@test.em.com", "makis.das@test.com")]
+    public void UpdateEMail_WithValues_ShouldReturn(string initValue, string updatedValue)
+    {
+        var email = new EMail(initValue);
+        email.Value = updatedValue;
+        Assert.AreEqual(email.Value, updatedValue);
+    }
+    
+    [TestMethod]
+    [DataRow("makis@test.com", "makis2@@test.com")]
+    [DataRow("makis.das@test.com", "makis..das@test.gr.com")]
+    [DataRow("makis.das@test.em.com", "makis. das@test.com")]
+    public void UpdateEMail_WithValues_ShouldThrow(string initValue, string updatedValue)
+    {
+        var email = new EMail(initValue);
+        Assert.ThrowsException<InvalidDataTypeException>(() => email.Value = updatedValue);
     }
 }
