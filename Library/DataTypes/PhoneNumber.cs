@@ -37,21 +37,31 @@ public class PhoneNumber : DataType<string>
         {
             throw new InvalidDataTypeException(arg, this, "can't be empty!");
         }
-
-        // TODO
-        arg = Regex.Replace(arg!, @"\s+", "");
-
-        if (arg!.Length.Equals(ActualLength))
+        
+        if (OverrideDefaultValidation is not null)
         {
-            throw new InvalidDataTypeException($"Value's length of type '{this}' must be 13 characters, 3 for country code and 10 the actual number!");
+            OverrideDefaultValidation(arg);
         }
-
-        if (arg!.ContainsLetter())
+        else
         {
-            throw new InvalidDataTypeException(arg, this, "mustn't contain any letter!");
-        }
+            // TODO
+            arg = Regex.Replace(arg!, @"\s+", "");
 
-        // TODO contains any other symbol except +
+            if (arg!.Length.Equals(ActualLength))
+            {
+                throw new InvalidDataTypeException(
+                    $"Value's length of type '{this}' must be 13 characters, 3 for country code and 10 the actual number!");
+            }
+
+            if (arg!.ContainsLetter())
+            {
+                throw new InvalidDataTypeException(arg, this, "mustn't contain any letter!");
+            }
+
+            // TODO contains any other symbol except +
+        }
+        
+        ExtraValidation?.Invoke(arg);
     }
 }
 
