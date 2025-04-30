@@ -34,62 +34,57 @@ public class EMail : DataType<string>
     {
         Value = value;
     }
-    
-    public override void ValidateValue(string arg)
+
+    public EMail(string value, CustomValidation<string> extraValidation)
     {
-        ValidateIsNotNull(arg);
-        
+        ExtraValidation = extraValidation;
+        Value = value;
+    }
+    
+    protected override void ApplyStrictDataTypeValidations(string arg)
+    {
         if (arg.IsBlank())
         {
             throw new InvalidDataTypeException(arg, this, "can't be empty or contain any whitespace!");
         }
+   
+        var symbols = GetSymbolsFromString(arg);
         
-        if (OverrideDefaultValidation is not null)
+        if (AreSymbolsUnacceptable(symbols))
         {
-            OverrideDefaultValidation(arg);
-        }
-        else
-        {
-            var symbols = GetSymbolsFromString(arg);
-            
-            if (AreSymbolsUnacceptable(symbols))
-            {
-                throw new InvalidDataTypeException(arg, this, "mustn't contain unacceptable symbols!");
-            }
-
-            var numberOfAts = symbols.Count(s => s.Equals(Symbols.At));
-            if (numberOfAts is > 1 or 0)
-            {
-                throw new InvalidDataTypeException(arg, this, "contains zero or more than one '@'!");
-            }
-            
-            var numberOfDots = symbols.Count(s => s.Equals(Symbols.Dot));
-            if (numberOfDots > 1 && arg.ContainsMoreThanOneDotInTheRow())
-            {
-                throw new InvalidDataTypeException(arg, this, "contains more than one dots in the row!");
-            }
-
-            var numberOfHyphens = symbols.Count(s => s.Equals(Symbols.Hyphen));
-            if (numberOfHyphens > 1 && arg.ContainsMoreThanOneHyphenInTheRow())
-            {
-                throw new InvalidDataTypeException(arg, this, "contains more than one hyphen in the row!");
-            }
-            
-            var numberOfUnderscores = symbols.Count(s => s.Equals(Symbols.Underscore));
-            if (numberOfUnderscores > 1 && arg.ContainsMoreThanOneUnderscoreInTheRow())
-            {
-                throw new InvalidDataTypeException(arg, this, "contains more than one underscore in the row!");
-            }
-            
-            //TODO: the domain must only contain dots from symbols 
-
-            if (arg.ContainsNonLatinCharacters())
-            {
-                throw new InvalidDataTypeException(arg, this, "contains at least one non latin character!");
-            }
+            throw new InvalidDataTypeException(arg, this, "mustn't contain unacceptable symbols!");
         }
 
-        ExtraValidation?.Invoke(arg);
+        var numberOfAts = symbols.Count(s => s.Equals(Symbols.At));
+        if (numberOfAts is > 1 or 0)
+        {
+            throw new InvalidDataTypeException(arg, this, "contains zero or more than one '@'!");
+        }
+        
+        var numberOfDots = symbols.Count(s => s.Equals(Symbols.Dot));
+        if (numberOfDots > 1 && arg.ContainsMoreThanOneDotInTheRow())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains more than one dots in the row!");
+        }
+
+        var numberOfHyphens = symbols.Count(s => s.Equals(Symbols.Hyphen));
+        if (numberOfHyphens > 1 && arg.ContainsMoreThanOneHyphenInTheRow())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains more than one hyphen in the row!");
+        }
+        
+        var numberOfUnderscores = symbols.Count(s => s.Equals(Symbols.Underscore));
+        if (numberOfUnderscores > 1 && arg.ContainsMoreThanOneUnderscoreInTheRow())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains more than one underscore in the row!");
+        }
+        
+        //TODO: the domain must only contain dots from symbols 
+
+        if (arg.ContainsNonLatinCharacters())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains at least one non latin character!");
+        }
     }
     
     private static List<char> GetSymbolsFromString(string value)

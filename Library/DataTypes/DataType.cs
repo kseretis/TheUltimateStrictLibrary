@@ -2,21 +2,37 @@
 
 namespace TheUltimateStrictLibrary.DataTypes;
 
-public delegate void CustomValidation(string arg);
+public delegate void CustomValidation<in T>(T arg);
 
 public abstract class DataType<T>
 {
-    public static CustomValidation? OverrideDefaultValidation { get; set; }
+    public static CustomValidation<T>? OverrideDefaultValidation { get; set; }
     
-    public CustomValidation? ExtraValidation { get; protected init; }
+    public CustomValidation<T>? ExtraValidation { get; protected init; }
     
     protected T value;
 
     public virtual T Value { get; set; } = default!;
     
-    public abstract void ValidateValue(T arg);
+    protected void ValidateValue(T arg)
+    {
+        ValidateIsNotNull(arg);
+        
+        if (OverrideDefaultValidation is not null)
+        {
+            OverrideDefaultValidation(arg);
+        }
+        else
+        {
+            ApplyStrictDataTypeValidations(arg);
+        }
+        
+        ExtraValidation?.Invoke(arg);
+    }
     
-    protected void ValidateIsNotNull(T? arg)
+    protected abstract void ApplyStrictDataTypeValidations(T arg);
+    
+    private void ValidateIsNotNull(T? arg)
     {
         if (arg is null)
         {

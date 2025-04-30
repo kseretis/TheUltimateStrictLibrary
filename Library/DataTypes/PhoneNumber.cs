@@ -2,7 +2,6 @@
 using TheUltimateStrictLibrary.Enums;
 using TheUltimateStrictLibrary.Exceptions;
 using TheUltimateStrictLibrary.Extensions;
-using TheUltimateStrictLibrary.DataTypes;
 
 namespace TheUltimateStrictLibrary.DataTypes;
 
@@ -18,7 +17,7 @@ public class PhoneNumber : DataType<string>
         get => CountryCode + Number;
         set
         {
-            ValidateValue(value);
+            ApplyStrictDataTypeValidations(value);
             CountryCode = value!.GetCountryCodeFromPhoneNumber();
             Number = value[3..]; // FIXME 
         }
@@ -28,40 +27,35 @@ public class PhoneNumber : DataType<string>
     {
         Value = value;
     }
-    
-    public override void ValidateValue(string arg)
+
+    public PhoneNumber(string value, CustomValidation<string> extraValidation)
     {
-        ValidateIsNotNull(arg);
-        
+        ExtraValidation = extraValidation;
+        Value = value;
+    }
+    
+    protected override void ApplyStrictDataTypeValidations(string arg)
+    {
         if (arg.IsBlank())
         {
             throw new InvalidDataTypeException(arg, this, "can't be empty!");
         }
-        
-        if (OverrideDefaultValidation is not null)
+
+        // TODO
+        arg = Regex.Replace(arg!, @"\s+", "");
+
+        if (arg!.Length.Equals(ActualLength))
         {
-            OverrideDefaultValidation(arg);
+            throw new InvalidDataTypeException(
+                $"Value's length of type '{this}' must be 13 characters, 3 for country code and 10 the actual number!");
         }
-        else
+
+        if (arg!.ContainsLetter())
         {
-            // TODO
-            arg = Regex.Replace(arg!, @"\s+", "");
-
-            if (arg!.Length.Equals(ActualLength))
-            {
-                throw new InvalidDataTypeException(
-                    $"Value's length of type '{this}' must be 13 characters, 3 for country code and 10 the actual number!");
-            }
-
-            if (arg!.ContainsLetter())
-            {
-                throw new InvalidDataTypeException(arg, this, "mustn't contain any letter!");
-            }
-
-            // TODO contains any other symbol except +
+            throw new InvalidDataTypeException(arg, this, "mustn't contain any letter!");
         }
-        
-        ExtraValidation?.Invoke(arg);
+
+        // TODO contains any other symbol except +
     }
 }
 

@@ -20,38 +20,27 @@ public class Name : DataType<string>
         Value = value;
     }
 
-    public Name(string value, CustomValidation extraValidation)
+    public Name(string value, CustomValidation<string> extraValidation)
     {
         ExtraValidation = extraValidation;
         Value = value;
     }
     
-    public override void ValidateValue(string arg)
+    protected override void ApplyStrictDataTypeValidations(string arg)
     {
-        ValidateIsNotNull(arg);
-
         if (arg.IsBlank())
         {
-            throw new InvalidDataTypeException(arg, this, "can't be empty!");
+            throw new InvalidDataTypeException(arg, this, "can't be empty or contain any whitespace!");
         }
         
-        if (OverrideDefaultValidation is not null)
+        if (arg.ContainsNumber())
         {
-            OverrideDefaultValidation(arg);
-        }
-        else
-        {
-            if (arg.ContainsNumber())
-            {
-                throw new InvalidDataTypeException(arg, this, "contains at least a number!");
-            }
-
-            if (arg.ContainsSymbol())
-            {
-                throw new InvalidDataTypeException(arg, this, "contains at least a symbol!");
-            }
+            throw new InvalidDataTypeException(arg, this, "contains at least a number!");
         }
 
-        ExtraValidation?.Invoke(arg);
+        if (arg.ContainsSymbol())
+        {
+            throw new InvalidDataTypeException(arg, this, "contains at least a symbol!");
+        }
     }
 }

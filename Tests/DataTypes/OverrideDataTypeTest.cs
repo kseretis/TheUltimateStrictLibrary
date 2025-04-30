@@ -6,6 +6,12 @@ namespace Tests.DataTypes;
 [TestClass]
 public class OverrideDataTypeTest
 {
+    [TestCleanup]
+    public void CleanUp()
+    {
+        Name.OverrideDefaultValidation = null;
+    }
+    
     [TestMethod]
     [DataRow("Crocodilo")]
     public void CreateName_WithExtraValidation_ShouldReturn(string value)
