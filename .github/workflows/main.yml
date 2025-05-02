@@ -4,10 +4,9 @@
 name: Create & push nuget package
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  push: 
+    branches:
+      - main
 
 jobs:
   build:
