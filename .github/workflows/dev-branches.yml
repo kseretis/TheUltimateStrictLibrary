@@ -5,16 +5,12 @@
 name: Build & test dev-branch
 
 on:
-  push:
-    branches-ignore:
-      - main
   pull_request: 
     branches:
       - main
 
 jobs:
   build:
-    if: github.event_name == 'pull_request' || github.ref != 'refs/heads/main'
 
     runs-on: ubuntu-latest
 
