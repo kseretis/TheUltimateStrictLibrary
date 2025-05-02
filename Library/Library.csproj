@@ -10,7 +10,7 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <Title>The Ultimate Strict Library</Title>
     <Authors>Kleanthis Seretis</Authors>
-    <Version>0.4.3-alpha</Version>
+    <Version>0.4.4-alpha</Version>
     <RepositoryUrl>https://github.com/kseretis/TheUltimateStrictLibrary</RepositoryUrl>
     <Description>A delegate introduced to the DataType. It is used to override the default validation of a DataType or to add an extra validation.</Description>
     <IsPackable>true</IsPackable>
