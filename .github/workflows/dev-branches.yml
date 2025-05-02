@@ -2,7 +2,7 @@
 # It runs at every single branch except main
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET
+name: Branch build & test
 
 on:
   push:
