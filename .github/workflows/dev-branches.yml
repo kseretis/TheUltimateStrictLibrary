@@ -2,11 +2,11 @@
 # It runs at every single branch except main
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET
+name: Build & test dev-branch
 
 on:
-  push:
-    branches-ignore:
+  pull_request: 
+    branches:
       - main
 
 jobs:
