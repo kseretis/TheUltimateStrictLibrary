@@ -64,6 +64,7 @@ public class OverrideDataTypeTest
     
     [TestMethod]
     [DataRow("Croc")]
+    [DataRow("Crod")]
     public void CreateName_WithOverrideValidation_ShouldThrow(string value)
     {
         Name.OverrideDefaultValidation = ShouldBeMoreThan5Characters;
